@@ -65,21 +65,40 @@
 &trackball_listener {
     status = "okay";
     input-processors =<&mouse_runtime_input_processor>,
-        //<&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>;         //Y軸反転
+        //<&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,       //Y軸反転
         //<&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
-        <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>;       //X軸反転
-        //<&zip_temp_layer 2 1000>;                            //オートマウスレイヤーの選択;
+        <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
+        <&zip_temp_layer 4 300>;                            //オートマウスレイヤー(AML=レイヤー4)を300ms有効化
 
 
     scroller {
-        layers = <3>;
+        layers = <6>;
         input-processors = 
             // <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
             // <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,       //Y軸反転
+            //<&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,       //Y軸反転
             <&zip_xy_to_scroll_mapper>,                         //スクロールモードに変更
             <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //スクロールのX軸反転
             //<&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,   //スクロールのY軸反転
             <&zip_scroll_scaler 1 8>;                           //スクロール量を1/8倍
     };
+};
+
+&zip_temp_layer {
+    require-prior-idle-ms = <200>;
+    excluded-positions = <
+        18  // Shift+Ctrl+Tab (AML)
+        19  // MB1 (AML)
+        20  // MB2 (AML)
+        21  // SCROLL レイヤー呼び出し (AML)
+        22  // Ctrl+Tab (AML)
+        24  // Left_Shift
+        31  // Ctrl+F4 (AML)
+        32  // Alt+Left (AML)
+        33  // Alt+Right (AML)
+        35  // Right_Shift
+        37  // Left_Win
+        38  // Left_Alt
+        39  // Left_Control
+    >;
 };
