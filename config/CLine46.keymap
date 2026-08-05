@@ -100,7 +100,7 @@
         MARK {
             bindings = <
 &kp TAB         &trans               &kp LC(LG(LEFT_ARROW))  &kp LG(TAB)   &kp LC(LG(RIGHT_ARROW))  &trans                                 &kp EQUAL    &kp LEFT_BRACE  &kp RIGHT_BRACKET  &kp BACKSLASH  &kp LEFT_BRACKET  &trans
-&kp CAPSLOCK    &kp RS(N1)           &kp RS(N2)              &kp RS(N3)    &kp RS(N4)               &kp RS(N5)                             &kp LS(N6)   &kp LS(N7)      &kp LS(N8)         &kp LS(N9)     &kp SEMICOLON     &kp SINGLE_QUOTE
+&kp CAPSLOCK    &kp RS(N1)           &kp RS(N2)              &kp RS(N3)    &kp RS(N4)               &kp RS(N5)                             &kp LS(N6)   &kp LS(N7)      &kp LS(N8)         &kp LS(N9)     &kp SINGLE_QUOTE  &kp SEMICOLON
 &kp LEFT_SHIFT  &kp SLASH            &kp DOUBLE_QUOTES       &kp MINUS     &kp COLON                &kp LC(PAUSE_BREAK)                    &kp JP_PIPE  &kp PLUS        &kp RIGHT_BRACE    &kp PIPE       &kp JP_YEN        &kp RIGHT_SHIFT
                 &kp RA(PRINTSCREEN)  &kp PRINTSCREEN         &kp LEFT_ALT  &kp LEFT_CONTROL         &trans      &kp BACKSPACE     &trans   &trans                       &trans             &trans
             >;
