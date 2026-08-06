@@ -71,15 +71,36 @@
         <&zip_temp_layer 4 300>;                            //オートマウスレイヤー(AML=レイヤー4)を300ms有効化
 
 
-    scroller {
+    // 縦スクロール専用（VSCROLL=レイヤー6）。
+    // 片軸を 0 倍で潰す構成のため、コメントアウトされた候補行を有効化するときは
+    // どちらの軸が潰されるかも見直すこと。候補行は zip_x_scaler より前に適用される。
+    // - X_INVERT: 直後に X が 0 になるため効かない
+    // - XY_SWAP: mapper に入る前に軸コードが入れ替わるため、zip_x_scaler 0 1 が潰すのは
+    //   「入れ替え後の X」＝元の Y になる。縦スクロール自体は生き残り、駆動が
+    //   ボールの上下から左右に変わるだけ（scaler の差し替えは不要）。実機未検証
+    v_scroller {
         layers = <6>;
-        input-processors = 
+        input-processors =
             // <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
             // <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
             //<&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,       //Y軸反転
+            <&zip_x_scaler 0 1>,                                //横成分を捨てる(縦スクロール専用)
             <&zip_xy_to_scroll_mapper>,                         //スクロールモードに変更
-            <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //スクロールのX軸反転
+            <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //横成分が0のため実効なし(全方向へ戻すとき用に温存)
             //<&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,   //スクロールのY軸反転
+            <&zip_scroll_scaler 1 8>;                           //スクロール量を1/8倍
+    };
+
+    // 横スクロール専用（HSCROLL=レイヤー8）。
+    // レイヤー6と8が同時に有効になるのは、位置9(&mo 8)を保持したまま位置21を押したとき
+    // （HSCROLL は全 &trans なので、AML が有効な間は AML の &mo 6 に落ちる）。挙動は未確認。
+    // 逆順は成立しない（VSCROLL の位置9 は &kp NUMBER_9 で &mo 8 に届かない）。
+    h_scroller {
+        layers = <8>;
+        input-processors =
+            <&zip_y_scaler 0 1>,                                //縦成分を捨てる(横スクロール専用)
+            <&zip_xy_to_scroll_mapper>,                         //スクロールモードに変更
+            <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //スクロールのX軸反転(向きを変えるならこの行を外す)
             <&zip_scroll_scaler 1 8>;                           //スクロール量を1/8倍
     };
 };
@@ -87,10 +108,11 @@
 &zip_temp_layer {
     require-prior-idle-ms = <200>;
     excluded-positions = <
+        9   // HSCROLL レイヤー呼び出し (AML)
         18  // Shift+Ctrl+Tab (AML)
         19  // MB1 (AML)
         20  // MB2 (AML)
-        21  // SCROLL レイヤー呼び出し (AML)
+        21  // VSCROLL レイヤー呼び出し (AML)
         22  // Ctrl+Tab (AML)
         24  // Left_Shift
         31  // Ctrl+F4 (AML)
