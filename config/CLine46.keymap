@@ -126,8 +126,8 @@
 
         AML {
             bindings = <
-&kp TAB         &trans  &trans  &trans  &trans  &trans                      &trans           &trans      &trans              &trans               &trans       &trans
-&kp CAPSLOCK    &trans  &trans  &trans  &trans  &trans                      &kp LS(LC(TAB))  &mkp MB1    &mkp MB2            &mo 6                &kp LC(TAB)  &mo 8
+&kp TAB         &trans  &trans  &trans  &trans  &trans                      &trans           &trans      &trans              &mo 8                &trans       &trans
+&kp CAPSLOCK    &trans  &trans  &trans  &trans  &trans                      &kp LS(LC(TAB))  &mkp MB1    &mkp MB2            &mo 6                &kp LC(TAB)  &trans
 &kp LEFT_SHIFT  &trans  &trans  &trans  &trans  &trans                      &trans           &kp LC(F4)  &kp LA(LEFT_ARROW)  &kp LA(RIGHT_ARROW)  &trans       &kp RIGHT_SHIFT
                 &trans  &trans  &trans  &trans  &trans  &trans     &trans   &trans                       &trans              &trans
             >;
@@ -135,8 +135,8 @@
 
         MOUSE {
             bindings = <
-&kp TAB         &trans  &trans  &trans  &trans  &trans                      &trans           &trans      &trans              &trans               &trans       &trans
-&kp CAPSLOCK    &trans  &trans  &trans  &trans  &trans                      &kp LS(LC(TAB))  &mkp MB1    &mkp MB2            &mo 6                &kp LC(TAB)  &mo 8
+&kp TAB         &trans  &trans  &trans  &trans  &trans                      &trans           &trans      &trans              &mo 8                &trans       &trans
+&kp CAPSLOCK    &trans  &trans  &trans  &trans  &trans                      &kp LS(LC(TAB))  &mkp MB1    &mkp MB2            &mo 6                &kp LC(TAB)  &trans
 &kp LEFT_SHIFT  &trans  &trans  &trans  &trans  &trans                      &trans           &kp LC(F4)  &kp LA(LEFT_ARROW)  &kp LA(RIGHT_ARROW)  &trans       &kp RIGHT_SHIFT
                 &trans  &trans  &trans  &trans  &trans  &trans     &trans   &trans                       &trans              &trans
             >;

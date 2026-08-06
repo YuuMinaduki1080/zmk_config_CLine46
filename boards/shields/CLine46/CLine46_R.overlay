@@ -92,7 +92,9 @@
     };
 
     // 横スクロール専用（HSCROLL=レイヤー8）。
-    // レイヤー6と8が同時に有効になる場合（位置21を保持したまま位置23を押す）の挙動は未確認。
+    // レイヤー6と8が同時に有効になるのは、位置9(&mo 8)を保持したまま位置21を押したとき
+    // （HSCROLL は全 &trans なので、AML が有効な間は AML の &mo 6 に落ちる）。挙動は未確認。
+    // 逆順は成立しない（VSCROLL の位置9 は &kp NUMBER_9 で &mo 8 に届かない）。
     h_scroller {
         layers = <8>;
         input-processors =
@@ -106,12 +108,12 @@
 &zip_temp_layer {
     require-prior-idle-ms = <200>;
     excluded-positions = <
+        9   // HSCROLL レイヤー呼び出し (AML)
         18  // Shift+Ctrl+Tab (AML)
         19  // MB1 (AML)
         20  // MB2 (AML)
         21  // VSCROLL レイヤー呼び出し (AML)
         22  // Ctrl+Tab (AML)
-        23  // HSCROLL レイヤー呼び出し (AML)
         24  // Left_Shift
         31  // Ctrl+F4 (AML)
         32  // Alt+Left (AML)
