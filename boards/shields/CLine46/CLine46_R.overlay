@@ -53,7 +53,13 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&xiao_d 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        cpi = <600>;
+        // 転がした量に対するポインタの移動量。追従性の体感に最も直結する。
+        // 指定可能なのは 200〜3200・200 刻み。速すぎ・遅すぎなら 200 刻みで調整する。
+        // スクロール量も連動して変わるので、粗くなりすぎたら v_scroller / h_scroller
+        // 両方の zip_scroll_scaler の除数（現在どちらも 8）を上げる。
+        // 出典: badjeff/zmk-pmw3610-driver zmk-0.3 の dts/bindings/pixart,pmw3610.yml、
+        // cpi の description "CPI value (Range: 200 - 3200, Step: 200)"（2026-08-06 に参照して確認）
+        cpi = <1000>;
         //swap-xy;
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
